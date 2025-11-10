@@ -25,14 +25,14 @@ import {
   Link as LinkIcon,
 } from "lucide-react";
 import { toast } from "sonner";
+import { useUploadThing } from "@/lib/uploadthing";
 
 export default function ProfilePage() {
   const { data: session } = useSession();
   const router = useRouter();
   const user = session?.user;
-
+const { startUpload} = useUploadThing("profileImage");
   const [name, setName] = useState(user?.name || "");
-  const [profileImage, setProfileImage] = useState<File | null>(null);
   const [preview, setPreview] = useState(user?.image || "");
   const [loading, setLoading] = useState(false);
 
@@ -74,37 +74,30 @@ export default function ProfilePage() {
 
   if (!user) return null;
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setProfileImage(file);
-      setPreview(URL.createObjectURL(file));
-    }
-  };
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
 
+  try {
+    setLoading(true);
+    const res = await startUpload([file]);
+    if (res && res.length > 0) {
+      const uploadedUrl = res[0].ufsUrl; // correct property
+      setPreview(uploadedUrl);       
+    }
+  } catch {
+    toast.error("Image upload failed");
+  } finally {
+    setLoading(false);
+  }
+};
   const handleUpdate = async () => {
     try {
       setLoading(true);
-      let uploadedImageUrl = preview;
-
-      if (profileImage) {
-        const formData = new FormData();
-        formData.append("file", profileImage);
-
-        const res = await fetch("/api/upload", {
-          method: "POST",
-          body: formData,
-        });
-
-        const data = await res.json();
-        uploadedImageUrl = data.url;
-      }
-
-      await updateUser({
-        name,
-        image: uploadedImageUrl,
-      });
-
+     await updateUser({
+      name,
+      image: preview, // Use UploadThing uploaded URL
+    });
       toast.success("Profile updated 🎉", {
         description:
           "Your name and profile picture have been updated successfully.",
