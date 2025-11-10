@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { resetPassword } from "@/lib/auth-client";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -75,10 +74,12 @@ export default function ResetPassword() {
     }
 
     try {
-      const result = await resetPassword({
-        newPassword: data.password,
-        token,
+      const response = await fetch("/api/reset-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ newPassword: data.password, token }),
       });
+      const result = await response.json();
 
       if (result.error) {
         setError(result.error.message || "Failed to reset password");
