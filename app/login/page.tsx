@@ -65,14 +65,11 @@ export default function Login() {
 
   const handleGoogleLogin = async () => {
     try {
-      const result = await signIn.social({
+      await signIn.social({
         provider: "google",
+        callbackURL: "/sleep-tracker",
+        disableRedirect: false,
       });
-      if (result.error) {
-        setError(result.error.message || "Login Failed");
-      } else {
-        router.push("/sleep-tracker");
-      }
     } catch {
       setError("An Error occured during Login");
     }
