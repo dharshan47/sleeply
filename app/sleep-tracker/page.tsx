@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import React from "react";
 import AddNewRecord from "../../components/AddNewRecord";
 import RecordChart from "@/components/RecordChart";
