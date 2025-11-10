@@ -1,86 +1,115 @@
-🌙 Sleeply
+# 🌙 Sleeply
+> A modern sleep tracking web app built with **Next.js 16**, featuring real-time analytics, personalized insights, and comprehensive sleep data visualization.
 
-A modern  sleep tracking web application built with Next.js 16, featuring real-time analytics, personalized insights, and comprehensive sleep data visualization.
+---
 
-Next.js React TypeScript Tailwind CSS
+## 🖥️ Tech Stack
 
-✨ Features
-📊 Sleep Analytics
-Sleep Duration Tracking: Record and monitor your daily sleep hours
-Visual Charts: Beautiful data visualizations using Chart.js
-Best & Worst Sleep Analysis: Track your sleep patterns and extremes
-Average Sleep Calculation: Get insights into your sleep habits
+### **Frontend**
+- ⚛️ **Next.js 16** — React framework with App Router
+- ⚛️ **React 19** — Latest concurrent React
+- 🦺 **TypeScript** — Type-safe development
+- 🎨 **Tailwind CSS** — Utility-first styling
+- 📊 **Chart.js + React Chart.js 2** — Beautiful charts & visualizations
 
-💼 Core Functionality
-Sleep Record Management: Add, edit, and delete sleep entries with ease
-Real-time Statistics: Comprehensive sleep analytics dashboard
-Sleep History: Complete sleep record history with search and filter
-Date-based Tracking: Track sleep patterns over time
+### **Backend & Database**
+- 🐘 **Neon** — Serverless PostgreSQL
+- 🧩 **Prisma** — Type-safe ORM
+- ⚙️ **Server Actions** — Next.js direct server functions
 
-🎨 Modern UI/UX
-Fully Responsive: Optimized for all screen sizes and devices
-Beautiful Animations: Smooth interactions and hover effects
-Gradient Designs: Modern card layouts with backdrop blur effects
-Clean Interface: Intuitive design focused on sleep data visualization
+### **Authentication**
+- 🔐 **Better Auth** — Complete authentication with Google, GitHub, Facebook & Email
 
-🔐 Authentication & Security
-Multiple Login Options: Google, GitHub, Facebook, or email/password
-Secure Sessions: Managed by Better Auth authentication
-User Profiles: Personalized dashboards with user information
-Protected Routes: Secure access to sleep data
+### **Deployment**
+- ▲ **Vercel** — Fast, serverless deployment platform
 
-🛠️ Tech Stack
-Frontend
-Next.js 16 - React framework with App Router
-React 19 - Latest React with concurrent features
-TypeScript - Type-safe development
-Tailwind CSS - Utility-first CSS framework
-Chart.js - Beautiful charts and visualizations
-React Chart.js 2 - React wrapper for Chart.js
+---
 
-Backend & Database
-Neon - Serverless PostgreSQL database
-Prisma - Type-safe database ORM
-Server Actions - Direct server functions in Next.js
+## ✨ Features
 
-Authentication
-Better Auth - Complete authentication solution
+### 📊 **Sleep Analytics**
+- Track and visualize your **daily sleep duration**
+- Beautiful **data charts** with Chart.js
+- Identify **best & worst sleep days**
+- Calculate your **average sleep hours**
 
-Deployment
-Vercel - Serverless deployment platform
+### 💼 **Core Functionality**
+- Add, edit, and delete **sleep records**
+- Real-time **statistics dashboard**
+- Complete **sleep history** with search & filter**
+- **Date-based** analytics to monitor sleep trends
 
+### 🎨 **Modern UI/UX**
+- 💻 Fully **responsive** — works on all devices
+- 🌀 Smooth **animations** and hover effects
+- 🌈 **Gradient & glassmorphism** card layouts
+- 🧭 Clean, minimal interface focused on usability
 
-🚀 Getting Started
-Prerequisites
-Node.js 18+
-npm, yarn, or pnpm
-Neon PostgreSQL database
-Installation
-Clone the repository
+### 🔒 **Authentication & Security**
+- Multiple login options: **Google, GitHub, Facebook, Email**
+- Secure sessions via **Better Auth**
+- Personalized **user dashboards**
+- Protected routes for sensitive sleep data
 
+---
+
+## 🚀 Getting Started
+
+### **Prerequisites**
+- 🧠 Node.js **10+**
+- 📦 npm, yarn, or pnpm
+- 🗄️ Neon PostgreSQL database
+
+---
+
+### **Installation**
+```bash
+# Clone the repository
 git clone https://github.com/dharshan47/sleeply.git
 cd sleeply
-Install dependencies
 
+# Install dependencies
 npm install
 # or
 yarn install
 # or
 pnpm install
-Set up environment variables Create a .env file in the root directory:
+```
 
+---
+
+### **Set up environment variables**
+Create a `.env` file in your root directory:
+
+```bash
 # Database
 DATABASE_URL="your-neon-database-url"
 
 # Better Auth Authentication
-BETTER_AUTH_SECRET=Your Better Auth Secret Key
+BETTER_AUTH_SECRET=your-better-auth-secret-key
 BETTER_AUTH_URL=http://localhost:3000
 
-#Better Auth Google Provider 
-GOOGLE_CLIENT_ID= Your google client id
-GOOGLE_CLIENT_SECRET = Your Google clent secret
-
-
+# Google Provider
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
 
 # App URL
-NEXT_PUBLIC_APP_URL="http://localhost:3000"
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
+---
+
+### **Run the development server**
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
+
+Then open [http://localhost:3000](http://localhost:3000) to view the app.
+
+---
+
+
