@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🌙 Sleeply
 
-## Getting Started
+A modern  sleep tracking web application built with Next.js 16, featuring real-time analytics, personalized insights, and comprehensive sleep data visualization.
 
-First, run the development server:
+Next.js React TypeScript Tailwind CSS
 
-```bash
-npm run dev
+✨ Features
+📊 Sleep Analytics
+Sleep Duration Tracking: Record and monitor your daily sleep hours
+Visual Charts: Beautiful data visualizations using Chart.js
+Best & Worst Sleep Analysis: Track your sleep patterns and extremes
+Average Sleep Calculation: Get insights into your sleep habits
+
+💼 Core Functionality
+Sleep Record Management: Add, edit, and delete sleep entries with ease
+Real-time Statistics: Comprehensive sleep analytics dashboard
+Sleep History: Complete sleep record history with search and filter
+Date-based Tracking: Track sleep patterns over time
+
+🎨 Modern UI/UX
+Fully Responsive: Optimized for all screen sizes and devices
+Beautiful Animations: Smooth interactions and hover effects
+Gradient Designs: Modern card layouts with backdrop blur effects
+Clean Interface: Intuitive design focused on sleep data visualization
+
+🔐 Authentication & Security
+Multiple Login Options: Google, GitHub, Facebook, or email/password
+Secure Sessions: Managed by Better Auth authentication
+User Profiles: Personalized dashboards with user information
+Protected Routes: Secure access to sleep data
+
+🛠️ Tech Stack
+Frontend
+Next.js 16 - React framework with App Router
+React 19 - Latest React with concurrent features
+TypeScript - Type-safe development
+Tailwind CSS - Utility-first CSS framework
+Chart.js - Beautiful charts and visualizations
+React Chart.js 2 - React wrapper for Chart.js
+
+Backend & Database
+Neon - Serverless PostgreSQL database
+Prisma - Type-safe database ORM
+Server Actions - Direct server functions in Next.js
+
+Authentication
+Better Auth - Complete authentication solution
+
+Deployment
+Vercel - Serverless deployment platform
+
+
+🚀 Getting Started
+Prerequisites
+Node.js 18+
+npm, yarn, or pnpm
+Neon PostgreSQL database
+Installation
+Clone the repository
+
+git clone https://github.com/dharshan47/sleeply.git
+cd sleeply
+Install dependencies
+
+npm install
 # or
-yarn dev
+yarn install
 # or
-pnpm dev
-# or
-bun dev
-```
+pnpm install
+Set up environment variables Create a .env file in the root directory:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Database
+DATABASE_URL="your-neon-database-url"
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Better Auth Authentication
+BETTER_AUTH_SECRET=Your Better Auth Secret Key
+BETTER_AUTH_URL=http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+#Better Auth Google Provider 
+GOOGLE_CLIENT_ID= Your google client id
+GOOGLE_CLIENT_SECRET = Your Google clent secret
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# App URL
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
