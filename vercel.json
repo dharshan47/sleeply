@@ -2,10 +2,7 @@
   "crons": [
     {
       "path": "/api/cron/monthly-report",
-      "schedule": "0 9 1 * *",
-      "headers": {
-        "Authorization": "Bearer ${CRON_SECRET}"
-      }
+      "schedule": "0 9 1 * *"
     }
   ]
 }
