@@ -11,8 +11,8 @@ import { ourFileRouter } from "./api/uploadthing/core";
 import Script from "next/script";
 import Schema from "@/components/seo/Schema";
 import GAListener from "@/components/analytics/GAListener";
-import { usePathname } from "next/navigation";
 import Breadcrumb from "@/components/seo/Breadcrumb";
+import CanonicalTag from "@/components/seo/CanonicalTag";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -104,13 +104,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
-  const canonicalUrl = `https://sleeply.vercel.app${pathname}`;
   return (
     <html lang="en" suppressHydrationWarning>
       <link rel="icon" href="/sleeply.png" />
       <link rel="apple-touch-icon" href="/sleeply.png" />
-      <link rel="canonical" href={canonicalUrl} />
+      <CanonicalTag/>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
