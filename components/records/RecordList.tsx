@@ -1,6 +1,6 @@
 "use client";
 
-import RecordItem from "../../profile/RecordItem";
+import RecordItem from "./RecordItem";
 import { Record } from "@/types/types";
 import { useState } from "react";
 
