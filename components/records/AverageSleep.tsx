@@ -1,5 +1,4 @@
-import { getUserRecord } from "@/app/actions/getUserRecord";
-import React from "react";
+import { getUserRecord } from "@/app/actions";
 
 const AverageSleep = async () => {
   try {
@@ -23,7 +22,7 @@ const AverageSleep = async () => {
           <h4 className="text-lg font-medium text-gray-600 mb-2">
             Your Average Sleep Last Month
           </h4>
-          <h1 className="sm:text-3xl text-2xl font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
+          <h1 className="sm:text-3xl text-2xl font-bold bg-linear-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
             {hours} hours {minutes} minutes
           </h1>
         </div>

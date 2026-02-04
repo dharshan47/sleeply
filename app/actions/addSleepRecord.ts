@@ -1,9 +1,10 @@
 "use server";
 
-import { auth } from "@/lib/auth";
+
+import { getSession } from "@/lib/auth-server";
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { headers } from "next/headers";
+
 
 interface RecordData {
   text: string;
@@ -45,10 +46,8 @@ export async function addSleepRecord(
     return { error: "Invalid date format" };
   }
 
-  const headersList = await headers();
-  const session = await auth.api.getSession({
-    headers: Object.fromEntries(headersList.entries()),
-  });
+  
+  const session = await getSession();
 
   const userId = session?.user?.id;
 

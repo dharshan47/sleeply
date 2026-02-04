@@ -1,17 +1,17 @@
 "use client";
 
-import { addSleepRecord } from "@/app/actions/addSleepRecord";
-import React, { useRef, useState } from "react";
-import { Label } from "./ui/label";
+import { useRef, useState } from "react";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectTrigger,
   SelectValue,
   SelectItem,
-} from "./ui/select";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { addSleepRecord } from "@/app/actions";
 
 const AddNewRecord = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -49,7 +49,7 @@ const AddNewRecord = () => {
   return (
     <div className="bg-gray-100 flex items-center justify-center">
       <div className="bg-white shadow-lg rounded-lg p-8 w-full">
-        <h3 className="text-2xl font-bold text-center mb-6 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
+        <h3 className="text-2xl font-bold text-center mb-6 bg-linear-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
           Track Your Sleep
         </h3>
         <form
@@ -92,7 +92,7 @@ const AddNewRecord = () => {
               </Select>
             </div>
 
-             {/* Sleep Date */}
+            {/* Sleep Date */}
             <div className="flex-1">
               <Label
                 className="block text-sm font-medium mb-2 text-gray-700"
@@ -112,7 +112,7 @@ const AddNewRecord = () => {
             </div>
           </div>
 
-           {/* Hours Slept */}
+          {/* Hours Slept */}
           <div>
             <Label
               htmlFor="amount"
@@ -137,10 +137,10 @@ const AddNewRecord = () => {
             />
             <div className=" text-center text-gray-700">{amount} hours</div>
           </div>
-           {/* Submit Button */}
+          {/* Submit Button */}
           <Button
             type="submit"
-            className="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-purple-600 hover:via-pink-600 hover:to-red-600 text-white px-4 py-2 rounded-md font-medium shadow-md transition flex items-center justify-center cursor-pointer"
+            className="w-full bg-linear-to-r from-purple-500 via-pink-500 to-red-500 hover:from-purple-600 hover:via-pink-600 hover:to-red-600 text-white px-4 py-2 rounded-md font-medium shadow-md transition flex items-center justify-center cursor-pointer"
             disabled={loading}
           >
             {loading ? (

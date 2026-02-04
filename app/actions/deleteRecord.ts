@@ -1,35 +1,27 @@
 "use server";
 
-import { auth } from "@/lib/auth";
+import { getSession } from "@/lib/auth-server";
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { headers } from "next/headers";
 
-export async function deleteRecord(recordId: string): Promise<{
-  message?: string;
-  error?: string;
-}> {
-  const headersList = await headers();
-  const session = await auth.api.getSession({
-    headers: Object.fromEntries(headersList.entries()),
-  });
-
+export async function deleteRecord(recordId: string) {
+  const session = await getSession();
   const userId = session?.user?.id;
 
   if (!userId) {
-    return { error: "User not found" };
+    throw new Error("Unauthorized");
   }
 
-  try {
-    await prisma.record.delete({
-      where: {
-        id: recordId,
-        userId,
-      },
-    });
-    revalidatePath("/sleep-tracker");
-    return { message: "Record Deleted" };
-  } catch {
-    return { error: " Error while deleting from Database" };
+  const result = await prisma.record.deleteMany({
+    where: {
+      id: recordId,
+      userId,
+    },
+  });
+
+  if (result.count === 0) {
+    throw new Error("Record not found");
   }
+
+  revalidatePath("/sleep-tracker");
 }

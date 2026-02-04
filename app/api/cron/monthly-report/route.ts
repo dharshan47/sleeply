@@ -1,6 +1,5 @@
 import { verifyCronAuth } from "@/lib/cron-auth";
-import { getMonthlySleepStats } from "@/scripts/getMonthlySleepStats";
-import { sendMonthlyMail } from "@/scripts/sendMonthlyMail";
+import { sendMonthlyMail, getMonthlySleepStats } from "@/scripts";
 
 export async function GET(req: Request) {
   if (!verifyCronAuth(req)) {
@@ -40,9 +39,8 @@ export async function GET(req: Request) {
           sent++;
         } catch (err) {
           failed++;
-          console.error(`❌ Failed email: ${report.email}`, err);
         }
-      })
+      }),
     );
 
     return Response.json({
@@ -52,7 +50,6 @@ export async function GET(req: Request) {
       failed,
     });
   } catch (error) {
-    console.error("❌ Monthly cron error:", error);
     return new Response("Internal Server Error", { status: 500 });
   }
 }

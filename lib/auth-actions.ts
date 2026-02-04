@@ -1,5 +1,7 @@
-import { getResetPasswordEmailHtml } from "@/template/ResetPasswordTemplate";
-import { getVerificationEmailHtml } from "@/template/EmailVerificationTemplate";
+import {
+  getResetPasswordEmailHtml,
+  getVerificationEmailHtml,
+} from "@/template";
 import { transporter } from "./nodemailer";
 import prisma from "./prisma";
 import { AuthActionData } from "@/types/types";

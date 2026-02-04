@@ -1,33 +1,18 @@
-"use client";
-
-import React from "react";
-import { useRouter } from "next/navigation";
-import { useSession } from "@/lib/auth-client";
+import { GetStaredButton } from "@/components/about";
 
 const About = () => {
-  const router = useRouter();
-
-  const { data: session } = useSession();
-
-  const getStarted = () => {
-    if (!session) {
-      router.push("/login");
-    } else {
-      router.push("/sleep-tracker");
-    }
-  };
   return (
     <div className="min-h-screen w-full mt-16 text-gray-800 font-sans ">
       <section className="flex flex-col items-center justify-center px-8 py-16 bg-gray-100">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-pink-500 to bg-red-500 bg-clip-text text-transparent">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-linear-to-r from-purple-600 via-pink-500 to-red-500 bg-clip-text text-transparent">
           About Sleeply
         </h1>
-        <p className="text-lg md:text-xl bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
+        <p className="text-lg md:text-xl bg-linear-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
           Your ultimate companion for tracking sleep and improving your health.
         </p>
       </section>
 
-      <section className="py-18 px-8 bg-white text-center max-w-3xl mx-auto">
+      <section className="py-16 px-8 bg-white text-center max-w-3xl mx-auto">
         <h2 className="text-3xl mb-8 font-bold">Our Mission</h2>
         <p className="text-gray-600 ">
           At Sleeply, we aim to help individuals achieve better sleep and
@@ -75,19 +60,14 @@ const About = () => {
       </section>
 
       <section className="py-16 px-8 bg-gray-100 text-center">
-        <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
+        <h2 className="text-3xl font-bold mb-4 bg-linear-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
           Ready to Sleep Better
         </h2>
-        <p className="text-lg mb-6 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
+        <p className="text-lg mb-6 bg-linear-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
           Join Sleeply today and take the first step towards better sleep and a
           healthier life.
         </p>
-        <span
-          className="inline-block bg-white text-purple-600 hover:text-purple-700 px-6 py-3 rounded-md font-medium shadow-md transition cursor-pointer"
-          onClick={getStarted}
-        >
-          Get Started
-        </span>
+        <GetStaredButton />
       </section>
     </div>
   );

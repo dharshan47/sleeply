@@ -5,7 +5,7 @@ export const transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: process.env.EMAIL_USER,        // sleeplyteam@gmail.com
+    user: process.env.EMAIL_USER,        // exampleteam@gmail.com
     pass: process.env.GMAIL_APP_PASSWORD // Gmail App Password
   },
 });

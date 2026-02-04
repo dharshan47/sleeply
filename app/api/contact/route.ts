@@ -1,6 +1,5 @@
 import { transporter } from "@/lib/nodemailer";
-import { getContactEmailHtml } from "@/template/ContactEmailTemplate";
-import { getUserReplyEmailHtml } from "@/template/UserReplyEmailTemplate";
+import { getContactEmailHtml, getUserReplyEmailHtml } from "@/template";
 
 export async function POST(req: Request) {
   try {
@@ -22,10 +21,9 @@ export async function POST(req: Request) {
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });
   } catch (error) {
-    console.error("Contact API error:", error);
     return new Response(
       JSON.stringify({ success: false, error: "Failed to send email." }),
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

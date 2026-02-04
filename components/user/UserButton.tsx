@@ -21,16 +21,16 @@ export default function UserButton() {
   const user = session?.user
     ? {
         ...session.user,
-        image: session.user.image || undefined, 
+        image: session.user.image || undefined,
       }
     : null;
-    
+
   if (!user) {
     return (
       <Button
-        variant="default" 
+        variant="default"
         onClick={() => router.push("/login")}
-        className="font-medium bg-gradient-to-r from-purple-600 via-pink-500 to-red-500"
+        className="font-medium bg-linear-to-r from-purple-600 via-pink-500 to-red-500"
       >
         Login
       </Button>
@@ -40,20 +40,14 @@ export default function UserButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="flex items-center gap-2 relative overflow-visible">
+        <button className="h-9 w-9 rounded-full p-0 focus:outline-none cursor-pointer   ">
           <Avatar className="h-8 w-8">
-            {user.image ? (
-              <AvatarImage src={user?.image} alt={user.name || "User"} />
-            ) : (
-              <AvatarFallback>
-                <User className="w-4 h-4" />
-              </AvatarFallback>
-            )}
+            <AvatarImage src={user.image} alt={user.name || "User"} />
+            <AvatarFallback className="font-medium">
+              {user.name?.[0]?.toUpperCase() || "U"}
+            </AvatarFallback>
           </Avatar>
-          <span className="hidden sm:inline text-sm font-medium">
-            {user.name || "User"}
-          </span>
-        </Button>
+        </button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="w-60">

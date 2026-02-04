@@ -1,8 +1,9 @@
 "use server";
 
-import { auth } from "@/lib/auth";
+
+import { getSession } from "@/lib/auth-server";
 import prisma from "@/lib/prisma";
-import { headers } from "next/headers";
+
 
 export async function getBestWorstSleep(): Promise<{
   bestSleep?: number;
@@ -10,10 +11,7 @@ export async function getBestWorstSleep(): Promise<{
   error?: string;
 }> {
     
-  const headersList = await headers();
-  const session = await auth.api.getSession({
-    headers: Object.fromEntries(headersList.entries()),
-  });
+ const session = await getSession();
 
   const userId = session?.user?.id;
 

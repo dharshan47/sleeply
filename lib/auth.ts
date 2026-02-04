@@ -1,6 +1,6 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { hashpassword, verifyPassword } from "./scrypt";
+
 import { sendResetPassword, sendVerificationEmail } from "./auth-actions";
 import prisma from "./prisma";
 
@@ -11,10 +11,7 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
-    password: {
-      hash: hashpassword,
-      verify: verifyPassword,
-    },
+  
     requireEmailVerification: true,
     /* Password Reset Email */
     sendResetPassword: async ({ user, url }) => {

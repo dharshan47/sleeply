@@ -1,14 +1,38 @@
 export const dynamic = "force-dynamic";
 
-import React from "react";
-import AddNewRecord from "../../components/AddNewRecord";
-import RecordChart from "@/components/RecordChart";
-import AverageSleep from "@/components/AverageSleep";
-import RecordHistory from "@/components/RecordHistory";
-import BestWorstSleep from "@/components/BestWorstSleep";
-import UserInfo from "@/components/UserInfo";
+import {
+  AddNewRecord,
+  AverageSleep,
+  BestWorstSleep,
+  RecordChart,
+  RecordHistory,
+} from "@/components/records";
+import {
+  BestWorstSleepSkeleton,
+  RecordChartSkeleton,
+  RecordHistorySkeleton,
+  AverageSleepSkeleton,
+} from "@/components/skeletons";
+import { UserInfo } from "@/components/user";
+import { Suspense } from "react";
+import { getRecordCount } from "../actions/getRecordCount";
 
-const SleepTracker = () => {
+const suspenseSections = [
+  { id: "record-chart", component: RecordChart, fallback: RecordChartSkeleton },
+  {
+    id: "average-sleep",
+    component: AverageSleep,
+    fallback: AverageSleepSkeleton,
+  },
+  {
+    id: "best-worst-sleep",
+    component: BestWorstSleep,
+    fallback: BestWorstSleepSkeleton,
+  },
+];
+
+const SleepTracker = async () => {
+  const count = await getRecordCount();
   return (
     <div className="min-h-screen w-full font-sans mt-16 text-gray-800 bg-gray-100 ">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-16 grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -20,15 +44,21 @@ const SleepTracker = () => {
 
         {/* Right Column */}
         <div className="space-y-6">
-          <RecordChart />
-          <AverageSleep />
-          <BestWorstSleep />
+          {suspenseSections.map(
+            ({ id, component: Component, fallback: Fallback }) => (
+              <Suspense key={id} fallback={<Fallback />}>
+                <Component />
+              </Suspense>
+            ),
+          )}
         </div>
       </div>
 
       {/* Full width bottom section */}
       <div className=" max-w-7xl mx-auto  ">
-        <RecordHistory />
+        <Suspense fallback={<RecordHistorySkeleton count={count} />}>
+          <RecordHistory />
+        </Suspense>
       </div>
     </div>
   );

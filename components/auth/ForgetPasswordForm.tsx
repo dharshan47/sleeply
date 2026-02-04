@@ -1,0 +1,129 @@
+"use client";
+
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useActionLock, useStatus } from "@/hooks";
+import { requestPasswordReset } from "@/lib/auth-client";
+import Link from "next/link";
+
+import { useState } from "react";
+
+export default function ForgetPasswordForm() {
+  const [email, setEmail] = useState("");
+  const { error, success, setError, setSuccess, reset, setSuccessWithTimeout } =
+    useStatus();
+  const { loading, lock, unlock } = useActionLock();
+
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!lock()) return;
+    reset();
+
+    try {
+      const result = await requestPasswordReset({
+        email,
+        redirectTo: "/reset-password",
+      });
+
+      if (result.error) {
+        const message = result.error?.message || "";
+
+        if (
+          message.includes("Email not found") ||
+          message.includes("Email not registered")
+        ) {
+          setError("This email is not registered with Sleeply.");
+        } else {
+          setError("Failed to send reset email. Please try again.");
+        }
+        setSuccess(false);
+      } else {
+        setSuccessWithTimeout(5000);
+      }
+    } catch (err: any) {
+      setError(err.message || "An error occurred. Please try again.");
+    } finally {
+      unlock();
+    }
+  };
+
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-background p-4">
+      <Card className="w-full max-w-md">
+        <CardHeader className="text-center">
+          <CardTitle>Forgot Password</CardTitle>
+          <CardDescription>
+            Enter your email to receive a password reset link
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          {success ? (
+            <div className="space-y-4">
+              <Alert role="status">
+                <AlertDescription>
+                  Password reset link has been sent to your email. Please check
+                  your inbox to reset your password.
+                </AlertDescription>
+              </Alert>
+              <Button
+                asChild
+                variant="outline"
+                className="w-full bg-transparent"
+              >
+                <Link href="/login">Back to Login</Link>
+              </Button>
+            </div>
+          ) : (
+            <form
+              onSubmit={handleSubmit}
+              className={`space-y-4 ${loading ? "pointer-events-none" : ""}`}
+            >
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    reset();
+                  }}
+                  required
+                />
+              </div>
+              {error && (
+                <div
+                  className="rounded-md bg-destructive/10 p-3 text-sm text-destructive"
+                  role="alert"
+                  aria-live="assertive"
+                >
+                  {error}
+                </div>
+              )}
+              <Button type="submit" className="w-full  " disabled={loading}>
+                {loading ? "Sending..." : "Send Reset Link"}
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                className="w-full bg-transparent"
+              >
+                <Link href="/login">Back to Login</Link>
+              </Button>
+            </form>
+          )}
+        </CardContent>
+      </Card>
+    </div>
+  );
+}

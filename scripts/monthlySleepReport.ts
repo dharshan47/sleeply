@@ -24,11 +24,11 @@ async function run() {
       sendMonthlyMail({
         ...report,
         month: monthName,
-      })
-    )
+      }),
+    ),
   );
 
-  console.log(`✅ Monthly sleep reports sent for ${monthName}`);
+ 
 }
 
 run().catch((err) => {

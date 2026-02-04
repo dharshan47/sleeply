@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import { Navbar, Footer } from "@/components/layout";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/next";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
 import Script from "next/script";
-import Schema from "@/components/seo/Schema";
-import GAListener from "@/components/analytics/GAListener";
-import Breadcrumb from "@/components/seo/Breadcrumb";
-import CanonicalTag from "@/components/seo/CanonicalTag";
+import { GAListener } from "@/components/analytics";
+import { Breadcrumb, CanonicalTag, Schema } from "@/components/seo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,36 +26,12 @@ export const metadata: Metadata = {
   description:
     "Track your sleep patterns, improve your sleep quality, and wake up refreshed with Sleeply – the modern sleep tracker app.",
   keywords: [
+    "sleeply",
+    "Sleeply",
+    "sleeply website",
+    "sleeply web app",
+    "sleeply vercel app",
     "sleep tracker",
-    "sleep monitoring",
-    "sleep quality app",
-    "sleep analysis",
-    "sleep wellness",
-    "healthy sleep",
-    "sleep log",
-    "sleep schedule",
-    "sleep improvement",
-    "Sleeply app",
-    "smart sleep tracking",
-    "sleep pattern analysis",
-    "REM sleep monitoring",
-    "deep sleep insights",
-    "circadian rhythm tracker",
-    "bedtime routine tracker",
-    "sleep duration tracking",
-    "sleep health optimization",
-    "restfulness analysis",
-    "personalized sleep tips",
-    "wake-up optimization",
-    "sleep cycle monitoring",
-    "sleep trend reports",
-    "insomnia management tool",
-    "sleep habit improvement",
-    "sleep score tracking",
-    "night sleep evaluation",
-    "sleep quality assessment",
-    "digital sleep journal",
-    "sleep performance tracker",
   ].join(", "),
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION_CODE || "",
@@ -97,6 +70,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  icons: {
+    icon: "/sleeply.ico",
+    apple: "/sleeply.ico",
+  },
 };
 
 export default function RootLayout({
@@ -106,9 +83,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <link rel="icon" href="/sleeply.png" />
-      <link rel="apple-touch-icon" href="/sleeply.png" />
-      <CanonicalTag/>
+      <head>
+        <link rel="icon" href="/sleeply.ico" sizes="any" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="/sleeply.ico" />
+        <link rel="manifest" href="/manifest.json" />
+        <CanonicalTag />
+      </head>
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

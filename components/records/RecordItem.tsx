@@ -1,16 +1,29 @@
 "use client";
 
-import { deleteRecord } from "@/app/actions/deleteRecord";
+import { deleteRecord } from "@/app/actions";
 import { Record } from "@/types/types";
-import React, { useState } from "react";
 
-const RecordItem = ({ record }: { record: Record }) => {
-  const [loading, setLoading] = useState(false);
+import { useTransition } from "react";
+import { toast } from "sonner";
 
-  const handleDeleteRecord = async (recordId: string) => {
-    setLoading(true);
-    await deleteRecord(recordId);
-    setLoading(false);
+interface RecordItemProps {
+  record: Record;
+  onDelete?: (id: string) => void;
+}
+
+const RecordItem = ({ record, onDelete }: RecordItemProps) => {
+  const [isPending, startTransition] = useTransition();
+
+  const handleDeleteRecord = (recordId: string) => {
+    startTransition(async () => {
+      try {
+        await deleteRecord(recordId);
+        toast.success("Record deleted successfully!");
+        if (onDelete) onDelete(recordId);
+      } catch (err: any) {
+        toast.error(err?.message || "Failed to delete record.");
+      }
+    });
   };
   return (
     <li
@@ -34,12 +47,12 @@ const RecordItem = ({ record }: { record: Record }) => {
       <button
         onClick={() => handleDeleteRecord(record.id)}
         className={`bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-600 transition cursor-pointer ${
-          loading ? "opacity-50 cursor-not-allowed" : ""
+          isPending ? "opacity-50 cursor-not-allowed" : ""
         }`}
         aria-label="Delete record"
-        disabled={loading} // Disable button while loading
+        disabled={isPending} // Disable button while loading
       >
-        {loading ? (
+        {isPending ? (
           <svg
             className="animate-spin h-5 w-5 text-white"
             xmlns="http://www.w3.org/2000/svg"
