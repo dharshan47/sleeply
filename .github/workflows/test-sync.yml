@@ -1,0 +1,11 @@
+name: SYNC TEST - IF YOU SEE THIS RUN IT
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sync-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Proof of Sync
+        run: echo "🚀 SYNC SUCCESSFUL - CODE IS UPDATED"
