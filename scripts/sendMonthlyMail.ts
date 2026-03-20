@@ -1,4 +1,4 @@
-import { transporter } from "../lib/nodemailer";
+import { transporter } from "../lib/nodemailer.js";
 
 interface MonthlyMailData {
   email: string;

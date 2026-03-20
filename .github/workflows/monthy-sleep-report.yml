@@ -38,7 +38,7 @@ jobs:
 
       # 5️⃣ Run monthly sleep report script
       - name: Send Monthly Sleep Reports
-        run: npx ts-node scripts/monthlySleepReport.ts
+        run: npx tsx scripts/monthlySleepReport.ts
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           EMAIL_USER: ${{ secrets.EMAIL_USER }}

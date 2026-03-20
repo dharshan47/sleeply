@@ -1,5 +1,5 @@
-import { getMonthlySleepStats } from "./getMonthlySleepStats";
-import { sendMonthlyMail } from "./sendMonthlyMail";
+import { getMonthlySleepStats } from "./getMonthlySleepStats.js";
+import { sendMonthlyMail } from "./sendMonthlyMail.js";
 
 async function run() {
   const now = new Date();
@@ -15,7 +15,6 @@ async function run() {
   const reports = await getMonthlySleepStats(year, month);
 
   if (!reports.length) {
-    console.log("⚠️ No sleep data found for last month");
     return;
   }
 

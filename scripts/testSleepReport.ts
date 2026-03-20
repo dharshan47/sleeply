@@ -1,8 +1,7 @@
-import { sendMonthlyMail } from "./sendMonthlyMail";
+import { sendMonthlyMail } from "./sendMonthlyMail.js";
 
 async function run() {
   const email = process.argv[2] || process.env.TEST_EMAIL || "user@example.com";
-  console.log(`Testing sleep report email delivery for: ${email}`);
   
   const now = new Date();
   const reportDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
@@ -19,7 +18,6 @@ async function run() {
     daysTracked: 6,
     noData: false,
   });
-  console.log("✅ Test email sent successfully to", email);
 }
 
 run().catch((err) => {
