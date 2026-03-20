@@ -41,7 +41,9 @@ jobs:
 
       # 5️⃣ Run test sleep report script
       - name: Send Test Sleep Report
-        run: npm run test:report -- "${{ github.event.inputs.email }}"
+        run: |
+          echo "🚀 Running with tsx-native-fix-v2"
+          npm run test:report -- "${{ github.event.inputs.email }}"
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
