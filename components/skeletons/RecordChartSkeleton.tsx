@@ -11,7 +11,7 @@ const RecordChartSkeleton = () => {
         </h3>
 
         {/* BarChart placeholder – EXACT size, no extra layout */}
-        <Skeleton className="h-75 w-full rounded-md" />
+        <Skeleton className="h-[300px] w-full rounded-md" />
 
       </div>
     </div>

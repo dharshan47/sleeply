@@ -154,7 +154,7 @@ export default function Profile() {
   };
 
   return (
-    <div className="min-h-screen bg-background w-full font-sans mt-16 text-gray-800">
+    <main className="min-h-screen bg-background w-full font-sans mt-16 text-gray-800">
       <div className="container max-w-4xl mx-auto py-10 px-4 space-y-6">
         <div className="flex items-center justify-between">
           <h1 className="text-4xl font-bold bg-linear-to-r from-purple-600 via-pink-500 to-red-500 bg-clip-text text-transparent">
@@ -348,6 +348,6 @@ export default function Profile() {
           {loading ? "Updating..." : "Update Profile"}
         </Button>
       </div>
-    </div>
+    </main>
   );
 }

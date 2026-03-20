@@ -40,10 +40,10 @@ export async function getMonthlySleepStats(
     if (!user.email) return null;
 
     if (amounts.length === 0) {
-      // User has no records
+      // User has no records - send the "no data" template
       return {
         email: user.email,
-        name: user.name || "User",
+        name: user.name || 'User',
         totalSleep: "0",
         avgSleep: "0",
         bestSleep: 0,

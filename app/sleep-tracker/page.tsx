@@ -1,12 +1,18 @@
 export const dynamic = "force-dynamic";
 
 import {
-  AddNewRecord,
   AverageSleep,
   BestWorstSleep,
   RecordChart,
   RecordHistory,
 } from "@/components/records";
+import nextDynamic from "next/dynamic";
+import { Skeleton } from "@/components/ui/skeleton";
+
+const AddNewRecord = nextDynamic(() => import("@/components/records/AddNewRecord"), {
+  loading: () => <Skeleton className="h-[400px] w-full rounded-lg" />,
+});
+
 import {
   BestWorstSleepSkeleton,
   RecordChartSkeleton,
@@ -34,7 +40,7 @@ const suspenseSections = [
 const SleepTracker = async () => {
   const count = await getRecordCount();
   return (
-    <div className="min-h-screen w-full font-sans mt-16 text-gray-800 bg-gray-100 ">
+    <main className="min-h-screen w-full font-sans mt-16 text-gray-800 bg-gray-100">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-16 grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left Column */}
         <div className="space-y-6">
@@ -55,12 +61,12 @@ const SleepTracker = async () => {
       </div>
 
       {/* Full width bottom section */}
-      <div className=" max-w-7xl mx-auto  ">
+      <div className="max-w-7xl mx-auto">
         <Suspense fallback={<RecordHistorySkeleton count={count} />}>
           <RecordHistory />
         </Suspense>
       </div>
-    </div>
+    </main>
   );
 };
 

@@ -1,8 +1,6 @@
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import Image from "next/image";
 import Img from "@/public/sleep-tracker.png";
-import { redirect } from "next/navigation";
-import { getSession } from "@/lib/auth-server";
 
 const faqs = [
   {
@@ -45,45 +43,38 @@ const testimonials = [
   },
 ];
 
-export default async function Home() {
-  const session = await getSession();
-
-  async function getStarted() {
-    "use server";
-    if (session) {
-      redirect("/sleep-tracker");
-    } else {
-      redirect("/login");
-    }
-  }
+export default function Home() {
   return (
-    <div className="min-h-screen font-sans w-full mt-16  text-gray-800 ">
-      <div className="grid grid-cols-1 md:grid-cols-2 bg-gray-100 jusity-center items-center p-3 md:p-10 pt-10 ">
-        <div className="md:pl-10 mb-8 ">
-          <span className="text-2xl md:text-4xl font-bold  bg-linear-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
+    <main className="min-h-screen font-sans w-full mt-16 text-gray-800">
+      <div className="grid grid-cols-1 md:grid-cols-2 bg-gray-100 justify-center items-center p-3 md:p-10 pt-10">
+        <div className="md:pl-10 mb-8">
+          <span className="text-2xl md:text-4xl font-bold bg-linear-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
             Welcome to Sleeply
           </span>
           <p className="md:text-xl mb-6 mt-2">
             Track your sleep, improve your health, and wake up feeling refreshed
             with Sleeply.
           </p>
-          <Button
-            className="w-auto bg-linear-to-r from-purple-500 via-pink-500 to-red-500 hover:from-purple-600 hover:via-pink-600 hover:to-red-600 text-white px-4 py-2 rounded-md font-medium cursor-pointer"
-            onClick={getStarted}
+          <Link
+            href="/sleep-tracker"
+            className="w-auto bg-linear-to-r from-purple-500 via-pink-500 to-red-500 hover:from-purple-600 hover:via-pink-600 hover:to-red-600 text-white px-4 py-2 rounded-md font-medium inline-block text-center transition-all"
+            aria-label="Get Started with Sleeply"
           >
             Get Started
-          </Button>
+          </Link>
         </div>
         <div className="flex-1 flex justify-center items-center">
           <Image
             src={Img}
             alt="SleepTracker Illustration"
             className="w-full md:max-w-md rounded-tl-3xl rounded-br-3xl shadow-lg"
+            priority
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
       </div>
       <div className="py-16 px-8 bg-white">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 ">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
           Frequently Asked Questions
         </h2>
         <div className="max-w-3xl mx-auto space-y-8">
@@ -99,18 +90,15 @@ export default async function Home() {
         <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
           What Our Users Say
         </h2>
-        <div
-          className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8
-        "
-        >
+        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((user) => (
             <div key={user.id} className="bg-white p-6 rounded-md shadow">
               <p className="text-gray-700 mb-4">&quot;{user.qoutes}&quot;</p>
-              <p className="text-purple-500 font-bold">- {user.name}</p>
+              <p className="text-purple-700 font-bold">- {user.name}</p>
             </div>
           ))}
         </div>
       </div>
-    </div>
+    </main>
   );
 }

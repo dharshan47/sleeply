@@ -86,7 +86,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/sleeply.ico" sizes="any" type="image/x-icon" />
         <link rel="apple-touch-icon" href="/sleeply.ico" />
-        <link rel="manifest" href="/manifest.json" />
+
         <CanonicalTag />
       </head>
 
@@ -95,7 +95,7 @@ export default function RootLayout({
       >
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
 
         <Script id="gtag-init" strategy="afterInteractive">

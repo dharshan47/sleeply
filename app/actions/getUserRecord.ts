@@ -16,19 +16,23 @@ export async function getUserRecord(): Promise<{
     return { error: "User not found" };
   }
   try {
-    const records = await prisma.record.findMany({
+    const aggregates = await prisma.record.aggregate({
       where: {
         userId,
+        amount: { gt: 0 },
+      },
+      _sum: {
+        amount: true,
+      },
+      _count: {
+        _all: true,
       },
     });
 
-    const record = records.reduce((sum, record) => sum + record.amount, 0);
-
-    const daysWithRecords = records.filter(
-      (record) => record.amount > 0,
-    ).length;
-
-    return { record, daysWithRecords };
+    return {
+      record: aggregates._sum.amount ?? 0,
+      daysWithRecords: aggregates._count._all,
+    };
   } catch {
     return { error: "Database error" };
   }

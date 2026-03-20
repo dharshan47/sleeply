@@ -20,23 +20,20 @@ export async function getBestWorstSleep(): Promise<{
   }
 
   try {
-    const records = await prisma.record.findMany({
+    const aggregates = await prisma.record.aggregate({
       where: {
         userId,
       },
-      select: {
+      _max: {
+        amount: true,
+      },
+      _min: {
         amount: true,
       },
     });
 
-    if (!records || records.length === 0) {
-      return { bestSleep: 0, worstSleep: 0 };
-    }
-
-    const amounts = records.map((record) => record.amount);
-
-    const bestSleep = Math.max(...amounts);
-    const worstSleep = Math.min(...amounts);
+    const bestSleep = aggregates._max.amount ?? 0;
+    const worstSleep = aggregates._min.amount ?? 0;
 
     return { bestSleep, worstSleep };
   } catch {

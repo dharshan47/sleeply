@@ -1,5 +1,5 @@
 import { getRecord } from "@/app/actions";
-import BarChart from "../chart/BarChart";
+import BarChart from "../chart/DynamicBarChart";
 
 const RecordChart = async () => {
   const { records, error } = await getRecord();

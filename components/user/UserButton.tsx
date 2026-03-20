@@ -40,7 +40,10 @@ export default function UserButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="h-9 w-9 rounded-full p-0 focus:outline-none cursor-pointer   ">
+        <button 
+          className="h-9 w-9 rounded-full p-0 focus:outline-none cursor-pointer"
+          aria-label="User menu"
+        >
           <Avatar className="h-8 w-8">
             <AvatarImage src={user.image} alt={user.name || "User"} />
             <AvatarFallback className="font-medium">

@@ -41,7 +41,9 @@ export async function addSleepRecord(
   let date: string;
 
   try {
-    date = new Date(dateValue.toString()).toISOString();
+    const d = new Date(dateValue.toString());
+    // Normalize to midnight UTC to ensure one record per day
+    date = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate())).toISOString();
   } catch {
     return { error: "Invalid date format" };
   }
@@ -56,53 +58,37 @@ export async function addSleepRecord(
   }
 
   try {
-    const existingRecord = await prisma.record.findFirst({
+    const upsertedRecord = await prisma.record.upsert({
       where: {
+        userId_date: {
+          userId,
+          date,
+        },
+      },
+      update: {
+        text,
+        amount,
+      },
+      create: {
         userId,
-        date: date,
+        date,
+        text,
+        amount,
       },
     });
 
-    let recordData: RecordData;
+    const recordData: RecordData = {
+      text: upsertedRecord.text,
+      amount: upsertedRecord.amount,
+      date: upsertedRecord.date.toISOString(),
+    };
 
-    if (existingRecord) {
-      const upadtedRecord = await prisma.record.update({
-        where: {
-          id: existingRecord.id,
-        },
-        data: {
-          text,
-          amount,
-        },
-      });
-
-      recordData = {
-        text: upadtedRecord.text,
-        amount: upadtedRecord.amount,
-        date: upadtedRecord.date?.toISOString() || date,
-      };
-    } else {
-      const createdRecord = await prisma.record.create({
-        data: {
-          text,
-          amount,
-          date,
-          userId,
-        },
-      });
-
-      recordData = {
-        text: createdRecord.text,
-        amount: createdRecord.amount,
-        date: createdRecord.date?.toISOString() || date,
-      };
-    }
     revalidatePath("/sleep-tracker");
-    
     return { data: recordData };
-  } catch {
+  } catch (err) {
+    console.error("Upsert error:", err);
     return {
-      error: "An unexpected error occurred while adding the sleep record.",
+      error: "An unexpected error occurred while saving the sleep record.",
     };
   }
 }

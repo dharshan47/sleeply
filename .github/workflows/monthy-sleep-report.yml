@@ -1,0 +1,50 @@
+name: Monthly Sleep Email Report
+
+on:
+  schedule:
+    - cron: "0 0 1 * *" # 1st day of every month UTC
+  workflow_dispatch: # optional manual trigger
+
+jobs:
+  send-reports:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      # 1️⃣ Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2️⃣ Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*" 
+          cache: "npm"
+
+      # 3️⃣ Install dependencies
+      - name: Install dependencies
+        run: npm ci
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+      # 4️⃣ Generate Prisma Client
+      - name: Generate Prisma Client
+        run: npx prisma generate
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+      # 5️⃣ Run monthly sleep report script
+      - name: Send Monthly Sleep Reports
+        run: npx ts-node scripts/monthlySleepReport.ts
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+
+      # 6️⃣ Optional: notify if workflow fails
+      - name: Notify on failure
+        if: failure()
+        run: echo "❌ Monthly Sleep Report workflow failed. Check logs."
