@@ -1,5 +1,5 @@
-import { getMonthlySleepStats } from "./getMonthlySleepStats.js";
-import { sendMonthlyMail } from "./sendMonthlyMail.js";
+import { getMonthlySleepStats } from "./getMonthlySleepStats.ts";
+import { sendMonthlyMail } from "./sendMonthlyMail.ts";
 
 async function run() {
   const now = new Date();

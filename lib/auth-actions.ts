@@ -1,10 +1,10 @@
 import {
   getResetPasswordEmailHtml,
   getVerificationEmailHtml,
-} from "@/template/index.js";
-import { transporter } from "./nodemailer.js";
-import prisma from "./prisma.js";
-import { AuthActionData } from "@/types/types.js";
+} from "@/template/index.ts";
+import { transporter } from "./nodemailer.ts";
+import prisma from "./prisma.ts";
+import { AuthActionData } from "@/types/types.ts";
 
 export async function sendResetPassword({ user, url }: AuthActionData) {
   try {

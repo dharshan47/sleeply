@@ -1,4 +1,4 @@
-import { sendMonthlyMail } from "./sendMonthlyMail.js";
+import { sendMonthlyMail } from "./sendMonthlyMail.ts";
 
 async function run() {
   const email = process.argv[2] || process.env.TEST_EMAIL || "user@example.com";

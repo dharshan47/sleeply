@@ -1,4 +1,4 @@
-import { auth } from "./auth.js";
+import { auth } from "./auth.ts";
 import { headers } from "next/headers";
 
 export async function getSession() {

@@ -1,8 +1,8 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 
-import { sendResetPassword, sendVerificationEmail } from "./auth-actions.js";
-import prisma from "./prisma.js";
+import { sendResetPassword, sendVerificationEmail } from "./auth-actions.ts";
+import prisma from "./prisma.ts";
 
 
 export const auth = betterAuth({

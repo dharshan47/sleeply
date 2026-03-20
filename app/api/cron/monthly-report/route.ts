@@ -1,5 +1,5 @@
-import { verifyCronAuth } from "@/lib/cron-auth.js";
-import { sendMonthlyMail, getMonthlySleepStats } from "@/scripts/index.js";
+import { verifyCronAuth } from "@/lib/cron-auth.ts";
+import { sendMonthlyMail, getMonthlySleepStats } from "@/scripts/index.ts";
 
 export async function GET(req: Request) {
   if (!verifyCronAuth(req)) {

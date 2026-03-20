@@ -1,2 +1,2 @@
-export {getMonthlySleepStats} from './getMonthlySleepStats.js';
-export {sendMonthlyMail} from './sendMonthlyMail.js';
+export {getMonthlySleepStats} from './getMonthlySleepStats.ts';
+export {sendMonthlyMail} from './sendMonthlyMail.ts';
