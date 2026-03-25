@@ -18,7 +18,7 @@
 - ⚙️ **Server Actions** — Next.js direct server functions
 
 ### **Authentication**
-- 🔐 **Better Auth** — Complete authentication with Google, GitHub, Facebook & Email
+- 🔐 **Better Auth** — Complete authentication with Google & Email
 
 ### **Deployment**
 - ▲ **Vercel** — Fast, serverless deployment platform
@@ -33,11 +33,14 @@
 - Identify **best & worst sleep days**
 - Calculate your **average sleep hours**
 
-### 💼 **Core Functionality**
 - Add, edit, and delete **sleep records**
 - Real-time **statistics dashboard**
-- Complete **sleep history** with search & filter**
+- Complete **sleep history** with search & filter
 - **Date-based** analytics to monitor sleep trends
+
+### 📧 **Automated Reports**
+- **Monthly Sleep Report** — Automated email summaries via GitHub Actions
+- **Customizable Alerts** — Keep track of your sleep health effortlessly
 
 ### 🎨 **Modern UI/UX**
 - 💻 Fully **responsive** — works on all devices
@@ -46,7 +49,7 @@
 - 🧭 Clean, minimal interface focused on usability
 
 ### 🔒 **Authentication & Security**
-- Multiple login options: **Google, GitHub, Facebook, Email**
+- Multiple login options: **Google, Email**
 - Secure sessions via **Better Auth**
 - Personalized **user dashboards**
 - Protected routes for sensitive sleep data
@@ -56,7 +59,7 @@
 ## 🚀 Getting Started
 
 ### **Prerequisites**
-- 🧠 Node.js **10+**
+- 🧠 Node.js **18.18+**
 - 📦 npm, yarn, or pnpm
 - 🗄️ Neon PostgreSQL database
 
