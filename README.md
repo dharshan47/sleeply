@@ -49,7 +49,7 @@
 - 🧭 Clean, minimal interface focused on usability
 
 ### 🔒 **Authentication & Security**
-- Multiple login options: **Google, GitHub, Facebook, Email**
+- Multiple login options: **Google, Email**
 - Secure sessions via **Better Auth**
 - Personalized **user dashboards**
 - Protected routes for sensitive sleep data
